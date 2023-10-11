@@ -17,4 +17,5 @@ export class TableComponent {
   public columnsDisplay: any[] = [];
   @Input()
   public data: any[] = [];
+
 }

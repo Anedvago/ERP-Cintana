@@ -67,9 +67,9 @@ export class DashboardComponent {
           habitacion: item.Rooms.name,
         };
       });
-      arr.forEach((elem) => {
-        this.rowsInd.push(elem);
-      });
+    
+      this.rowsInd = this.rowsInd.concat(arr);
+     
     });
   }
   public getClientsOcuped() {
@@ -81,10 +81,8 @@ export class DashboardComponent {
           habitacion: item.Rooms.name,
         };
       });
-
-      arr.forEach((elem) => {
-        this.rowsInd.push(elem);
-      });
+      this.rowsInd = this.rowsInd.concat(arr);
+    
     });
   }
 
