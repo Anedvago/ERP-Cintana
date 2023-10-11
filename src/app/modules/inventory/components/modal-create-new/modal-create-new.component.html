@@ -1,0 +1,55 @@
+<div class="container">
+    <form>
+        <div>
+            <mat-form-field>
+                <mat-label>Codigo</mat-label>
+                <input disabled="" matInput>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Referencia</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Nombre</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Precio</mat-label>
+                <input matInput>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Stock</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Departamento</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let dpto of departaments" [value]="dpto.id">
+                        {{dpto.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Seccion</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let scc of sections" [value]="scc.id">
+                        {{scc.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Familia</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let fam of families" [value]="fam.id">
+                        {{fam.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+
+    </form>
+
+</div>

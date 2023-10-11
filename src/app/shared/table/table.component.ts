@@ -18,4 +18,8 @@ export class TableComponent {
   @Input()
   public data: any[] = [];
 
+  public openModal(elem:any){
+    console.log(elem);
+    
+  }
 }

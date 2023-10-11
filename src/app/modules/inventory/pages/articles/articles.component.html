@@ -1,4 +1,4 @@
 <div class="container">
- <app-form-articles (quitFilters)="quitFilters()" (filterByCode)="filterByCode($event)" (filterByRef)="filterByRef($event)" (filterByName)="filterByName($event)" />
+ <app-form-articles (createNew)="openDialog()" (quitFilters)="quitFilters()" (filterByCode)="filterByCode($event)" (filterByRef)="filterByRef($event)" (filterByName)="filterByName($event)" />
 <app-table [columns]="columns" [columnsDisplay]="columnsDisplay" [data]="filterRows"/>
 </div>

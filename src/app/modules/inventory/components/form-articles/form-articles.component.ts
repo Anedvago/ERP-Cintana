@@ -27,6 +27,8 @@ export class FormArticlesComponent {
   public filterByName: EventEmitter<string> = new EventEmitter<string>();
   @Output()
   public quitFilters: EventEmitter<void> = new EventEmitter<void>();
+  @Output()
+  public createNew: EventEmitter<void> = new EventEmitter<void>();
 
   public emitFilterByCode() {
     this.filterByCode.emit(this.param);
@@ -42,5 +44,9 @@ export class FormArticlesComponent {
 
   public emitQuitFilters() {
     this.quitFilters.emit();
+  }
+
+  public emitCreateNew() {
+    this.createNew.emit();
   }
 }

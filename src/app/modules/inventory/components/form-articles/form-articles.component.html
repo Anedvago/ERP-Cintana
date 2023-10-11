@@ -17,7 +17,7 @@
     >
   </div>
   <div class="row">
-    <app-button-blue class="row2">Crear Articulo</app-button-blue>
+    <app-button-blue class="row2" (pressClick)="emitCreateNew()">Crear Nuevo</app-button-blue>
     <app-button-blue class="row2">Filtrar Categoria</app-button-blue>
     <app-button-blue class="row2" (pressClick)="emitQuitFilters()"
       >Quitar Filtros</app-button-blue

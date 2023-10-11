@@ -3,10 +3,13 @@ import { CommonModule } from '@angular/common';
 import { TableComponent } from 'src/app/shared/table/table.component';
 import { ArticleService } from 'src/app/services/article.service';
 import { FormArticlesComponent } from '../../components/form-articles/form-articles.component';
+import { ModalComponent } from 'src/app/shared/modal/modal.component';
+import { MatDialogModule,MatDialog } from '@angular/material/dialog';
+import { ModalCreateNewComponent } from '../../components/modal-create-new/modal-create-new.component';
 @Component({
   selector: 'app-articles',
   standalone: true,
-  imports: [CommonModule, TableComponent, FormArticlesComponent],
+  imports: [CommonModule, TableComponent, FormArticlesComponent, MatDialogModule, ModalCreateNewComponent],
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.css'],
 })
@@ -35,7 +38,7 @@ export class ArticlesComponent {
   public rows: any[] = [];
   public filterRows: any[] = [];
 
-  constructor(private articlesService: ArticleService) {
+  constructor(private articlesService: ArticleService,public dialog:MatDialog) {
     this.getArticles();
   }
 
@@ -70,5 +73,15 @@ export class ArticlesComponent {
 
   public quitFilters() {
     this.filterRows = this.rows.slice();
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalCreateNewComponent, {
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }
