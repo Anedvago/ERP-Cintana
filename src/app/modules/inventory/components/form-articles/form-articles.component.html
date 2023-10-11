@@ -1,0 +1,26 @@
+<form>
+  <div class="row">
+    <div class="row1">
+      <mat-form-field>
+        <mat-label>Input</mat-label>
+        <input matInput [(ngModel)]="param" name="param" />
+      </mat-form-field>
+    </div>
+    <app-button-blue class="row1" (pressClick)="emitFilterByCode()"
+      >Codigo</app-button-blue
+    >
+    <app-button-blue class="row1" (pressClick)="emitFilterByRef()"
+      >Referencia</app-button-blue
+    >
+    <app-button-blue class="row1" (pressClick)="emitFilterByName()"
+      >Nombre</app-button-blue
+    >
+  </div>
+  <div class="row">
+    <app-button-blue class="row2">Crear Articulo</app-button-blue>
+    <app-button-blue class="row2">Filtrar Categoria</app-button-blue>
+    <app-button-blue class="row2" (pressClick)="emitQuitFilters()"
+      >Quitar Filtros</app-button-blue
+    >
+  </div>
+</form>

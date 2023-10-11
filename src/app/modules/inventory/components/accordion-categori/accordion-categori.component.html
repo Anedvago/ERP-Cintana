@@ -1,0 +1,16 @@
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let dpto of departaments">
+    <mat-expansion-panel-header>
+      <mat-panel-title> {{ dpto.name | titlecase }} </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div *ngFor="let section of sections">
+      <div *ngFor="let scc of section">
+        <mat-expansion-panel *ngIf="scc.departament == dpto.id">
+          <mat-expansion-panel-header>
+            <mat-panel-title> {{ scc.name | titlecase }} </mat-panel-title>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
