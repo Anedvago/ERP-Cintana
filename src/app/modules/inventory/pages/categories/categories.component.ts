@@ -24,7 +24,8 @@ import { FamilyService } from 'src/app/services/family.service';
 export class CategoriesComponent {
   public departamentsArticles: any[] = [];
   public sectionsArticles: any[] = [];
-  public newCategory= {type:"", name:""};
+  public familiesArticles: any[] = [];
+  public newCategory = { type: "", category: "", departament: "", section: "", name: "" };
 
   constructor(private categoryService: CategoryService,
     public dialog: MatDialog,
@@ -33,6 +34,7 @@ export class CategoriesComponent {
     private familyService: FamilyService) {
     this.getAllDepartaments();
     this.getAllSections();
+    this.getAllFamilies();
   }
 
   public getAllDepartaments() {
@@ -52,28 +54,62 @@ export class CategoriesComponent {
           return acc;
         }, {})
       );
+      console.log(this.sectionsArticles);
+
     });
   }
+
+  public getAllFamilies() {
+    this.categoryService.getAllFamilies().then((data: any) => {
+      this.familiesArticles = Object.values(
+        data.reduce((acc: any, objeto: any) => {
+          const section = objeto.section;
+          if (!acc[section]) {
+            acc[section] = [];
+          }
+          acc[section].push(objeto);
+          return acc;
+        }, {})
+      );
+      console.log(this.familiesArticles);
+    });
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalNewCategoryComponent, {
-      data: {newCategory:this.newCategory},
+      data: { newCategory: this.newCategory },
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.newCategory = result;
-      console.log(result);
-      this.insertCategory()
-      
+
+      if (result != undefined) {
+        this.newCategory = result;
+        this.insertCategory();
+
+      } else {
+        this.newCategory = { type: "", category: "", departament: "", section: "", name: "" };
+      }
     });
   }
 
   public insertCategory() {
-    if (this.newCategory.type === "DEPARTAMENTO") {
-      this.departamentService.insertDepartament(this.newCategory.name).then((data) => {
-        console.log("Data ",data);
+    if (this.newCategory.category === "DEPARTAMENTO") {
+      this.departamentService.insertDepartament(this.newCategory.type, this.newCategory.name).then((data) => {
         this.getAllDepartaments();
+      })
+    }
+    if (this.newCategory.category === "SECCION") {
+      this.sectionService.insertSection(this.newCategory.type, this.newCategory.departament, this.newCategory.name).then((data) => {
         this.getAllSections();
       })
     }
+    if (this.newCategory.category === "FAMILIA") {
+      console.log(this.newCategory);
+      this.familyService.insertFamily(this.newCategory.type, this.newCategory.departament, this.newCategory.section, this.newCategory.name).then((data) => {
+        this.getAllFamilies();
+      })
+    }
+
+
   }
 }

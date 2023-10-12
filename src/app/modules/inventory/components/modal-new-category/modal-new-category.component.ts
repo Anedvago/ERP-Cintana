@@ -40,20 +40,15 @@ export class ModalNewCategoryComponent {
     this.dialogRef.close();
   }
 
-  public types = ["DEPARTAMENTO", "SECCION", "FAMILIA"];
-  public type = "";
+  public types = [{name:"Articulos",value:"A"}, {name:"Servicios",value:"S"}];
+  public categories = ["DEPARTAMENTO", "SECCION", "FAMILIA"];
   public departaments: any[] = [];
   public sections: any[] = [];
   public families: any[] = [];
-  public departament?: number;
-  public section?: number;
-  public family?: number;
 
   public getAllDepartaments() {
     this.departamentService.getAllDepartaments().then((data: any) => {
       this.departaments = data;
-      console.log(this.departaments);
-
     })
   }
 

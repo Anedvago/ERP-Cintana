@@ -24,5 +24,16 @@ export class FamilyService {
       .select('*');
     return Families;
   }
+
+  public async insertFamily(type: string, departament: string, section: string, name: string): Promise<any[] | null> {
+    const { data, error } = await this.supabaseClient
+      .from('Families')
+      .insert([
+        { type: type, departament: departament, section: section, name: name },
+      ])
+      .select()
+
+    return data;
+  }
 }
 

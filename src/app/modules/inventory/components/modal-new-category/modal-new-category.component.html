@@ -3,31 +3,36 @@
         <form>
             <mat-form-field>
                 <mat-label>Tipo de categoria</mat-label>
-                <mat-select [(ngModel)]="data.newCategory.type" name="type">
-                    <mat-option *ngFor="let opt of types" [value]="opt"> {{opt|titlecase}} </mat-option>
+                <mat-select [(ngModel)]="data.newCategory.category" name="data.newCategory.category">
+                    <mat-option *ngFor="let opt of categories" [value]="opt"> {{opt|titlecase}} </mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field *ngIf="data.newCategory.type == 'SECCION'||data.newCategory.type == 'FAMILIA'">
+            <mat-form-field *ngIf="data.newCategory.category == 'SECCION'||data.newCategory.category == 'FAMILIA'">
                 <mat-label>Departamento</mat-label>
-                <mat-select [(ngModel)]="departament" name="departament">
+                <mat-select [(ngModel)]="data.newCategory.departament" name="data.newCategory.departament">
                     <mat-option *ngFor="let dpto of departaments" [value]="dpto.id"> {{dpto.name|titlecase}} </mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field *ngIf="data.newCategory.type == 'FAMILIA' ">
+            <mat-form-field *ngIf="data.newCategory.category == 'FAMILIA' ">
                 <mat-label>Seccion</mat-label>
-                <mat-select [(ngModel)]="section" name="section">
+                <mat-select [(ngModel)]="data.newCategory.section" name="data.newCategory.section">
                     <mat-option *ngFor="let scc of sections" [value]="scc.id"> {{scc.name|titlecase}} </mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field *ngIf="data.newCategory.type == 'DEPARTAMENTO'|| data.newCategory.type == 'SECCION'||data.newCategory.type == 'FAMILIA'">
+            <mat-form-field *ngIf="data.newCategory.category == 'DEPARTAMENTO'|| data.newCategory.category == 'SECCION'||data.newCategory.category == 'FAMILIA'">
+                <mat-label>Categoria para</mat-label>
+                <mat-select [(ngModel)]="data.newCategory.type" name="data.newCategory.type">
+                    <mat-option *ngFor="let opt of types" [value]="opt.value"> {{opt.name|titlecase}} </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field *ngIf="data.newCategory.category== 'DEPARTAMENTO'|| data.newCategory.category == 'SECCION'||data.newCategory.category == 'FAMILIA'">
                 <mat-label>Nombre de la categoria</mat-label>
                 <input matInput [(ngModel)]="data.newCategory.name" name="data.newCategory.name">
             </mat-form-field>
         </form>
     </div>
     <div class="contButton">
-        <app-button-blue [mat-dialog-close]="data.newCategory" *ngIf="data.newCategory.type == 'DEPARTAMENTO'|| data.newCategory.type == 'SECCION'||data.newCategory.type == 'FAMILIA'">Crear nueva categoria</app-button-blue>
-        <!-- <button mat-button [mat-dialog-close]="data.newCategory.type" cdkFocusInitial>Ok</button> -->
+        <app-button-blue [mat-dialog-close]="data.newCategory" *ngIf="data.newCategory.category == 'DEPARTAMENTO'|| data.newCategory.category == 'SECCION'||data.newCategory.category == 'FAMILIA'">Crear nueva categoria</app-button-blue>
     </div>
     
     

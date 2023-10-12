@@ -24,6 +24,17 @@ export class SectionService {
       .select('*');
     return Sections;
   }
+
+  public async insertSection(type: string, departament: string, name: string): Promise<any[] | null> {
+    const { data, error } = await this.supabaseClient
+      .from('Sections')
+      .insert([
+        { type: type, departament: departament, name: name },
+      ])
+      .select()
+
+    return data;
+  }
 }
 
 

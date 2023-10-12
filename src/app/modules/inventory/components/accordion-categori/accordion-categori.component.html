@@ -9,6 +9,13 @@
           <mat-expansion-panel-header>
             <mat-panel-title> {{ scc.name | titlecase }} </mat-panel-title>
           </mat-expansion-panel-header>
+          <div *ngFor="let family of families">
+            <div *ngFor="let fam of family">
+              <mat-card *ngIf="fam.section == scc.id">
+                <mat-card-content>{{fam.name}}</mat-card-content>
+              </mat-card>
+            </div>
+          </div>
         </mat-expansion-panel>
       </div>
     </div>

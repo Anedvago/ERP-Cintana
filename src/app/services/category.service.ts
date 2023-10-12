@@ -18,17 +18,25 @@ export class CategoryService {
   }
 
   public async getAllDepartaments(): Promise<any[] | null> {
-    let { data: Rooms, error } = await this.supabaseClient
+    let { data: Departaments, error } = await this.supabaseClient
       .from('Departaments')
       .select('*')
-      .eq('type', 'a');
-    return Rooms;
+      .eq('type', 'A');
+    return Departaments;
   }
   public async getAllSections(): Promise<any[] | null> {
-    let { data: Rooms, error } = await this.supabaseClient
+    let { data: Sections, error } = await this.supabaseClient
       .from('Sections')
       .select('*')
-      .eq('type', 'a');
-    return Rooms;
+      .eq('type', 'A');
+    return Sections;
+  }
+
+  public async getAllFamilies(): Promise<any[] | null> {
+    let { data: Families, error } = await this.supabaseClient
+      .from('Families')
+      .select('*')
+      .eq('type', 'A');
+    return Families;
   }
 }
