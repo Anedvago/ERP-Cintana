@@ -7,11 +7,11 @@
   <main>
     <section>
       <h4>Categorias de articulos</h4>
-      <app-accordion-categori [departaments]="departamentsArticles" [sections]="sectionsArticles" [families]="familiesArticles"/>
+      <app-accordion-categori [departaments]="articlesDepartaments" [sections]="articlesSections" [families]="articlesFamilies"/>
     </section>
     <section>
       <h4>Categorias de servicios</h4>
-      <app-accordion-categori/>
+      <app-accordion-categori [departaments]="servicesDepartaments" [sections]="servicesSections" [families]="servicesFamilies"/>
     </section>
   </main>
 </div>
