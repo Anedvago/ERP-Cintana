@@ -24,4 +24,15 @@ export class DepartamentService {
       .select('*');
     return Departaments;
   }
+
+  public async insertDepartament(name: string) :Promise<any[] | null> {
+    const { data, error } = await this.supabaseClient
+      .from('Departaments')
+      .insert([
+        { name: name, type: "a" },
+      ])
+      .select()
+
+      return data;
+  }
 }
