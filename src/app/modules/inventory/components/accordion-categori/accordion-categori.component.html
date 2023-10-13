@@ -2,52 +2,61 @@
   <mat-expansion-panel *ngFor="let dpto of departaments">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <span> {{ dpto.name | titlecase }}</span>
-        <div>
-          <span
-            class="material-symbols-outlined edit"
-            (click)="emitEditCategory()"
-          >
-            edit
-          </span>
-          <span
-            class="material-symbols-outlined delete"
-            (click)="emitDeleteCategory()"
-          >
-            delete
-          </span>
-        </div>
+        {{ dpto.name | titlecase }}
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <div *ngFor="let section of sections">
-      <div *ngFor="let scc of section">
-        <mat-expansion-panel *ngIf="scc.departament == dpto.id">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <span>{{ scc.name | titlecase }} </span>
-              <div>
-                <span class="material-symbols-outlined"> edit </span>
-                <span class="material-symbols-outlined"> delete </span>
+    <span class="cont-btn">
+      <button mat-raised-button class="edit" (click)="emitEditCategory(dpto.id,'DEPARTAMENTO')">
+        Editar
+      </button>
+      <button mat-raised-button class="delete" (click)="emitDeleteCategory(dpto.id,'DEPARTAMENTO')">
+        Eliminar
+      </button>
+      <hr>
+    </span>
+    <mat-accordion>
+      <div *ngFor="let section of sections">
+        <div *ngFor="let scc of section">
+          <mat-expansion-panel *ngIf="scc.departament == dpto.id">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ scc.name | titlecase }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <span class="cont-btn">
+              <button mat-raised-button class="edit" (click)="emitEditCategory(scc.id,'SECCION')">
+                Editar
+              </button>
+              <button mat-raised-button class="delete" (click)="emitDeleteCategory(scc.id,'SECCION')">
+                Eliminar
+              </button>
+              <hr>
+            </span>
+            <mat-accordion>
+              <div *ngFor="let family of families">
+                <div *ngFor="let fam of family">
+                  <mat-expansion-panel *ngIf="fam.section == scc.id">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        {{ fam.name }}
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <span class="cont-btn">
+                      <button mat-raised-button class="edit" (click)="emitEditCategory(fam.id,'FAMILIA')">
+                        Editar
+                      </button>
+                      <button mat-raised-button class="delete" (click)="emitDeleteCategory(fam.id,'FAMILIA')">
+                        Eliminar
+                      </button>
+                    </span>
+                  </mat-expansion-panel>
+                </div>
               </div>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <div *ngFor="let family of families">
-            <div *ngFor="let fam of family">
-              <mat-card *ngIf="fam.section == scc.id">
-                <mat-card-content>
-                  <span>
-                    {{ fam.name }}
-                  </span>
-                  <div>
-                    <span class="material-symbols-outlined"> edit </span>
-                    <span class="material-symbols-outlined"> delete </span>
-                  </div>
-                </mat-card-content>
-              </mat-card>
-            </div>
-          </div>
-        </mat-expansion-panel>
+            </mat-accordion>
+          </mat-expansion-panel>
+        </div>
       </div>
-    </div>
+    </mat-accordion>
+
   </mat-expansion-panel>
 </mat-accordion>

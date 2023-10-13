@@ -31,4 +31,6 @@ h4 {
 }
 section {
   width: 48%;
+  height: 100%;
+  overflow-y: auto;
 }

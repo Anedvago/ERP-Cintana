@@ -1,25 +1,31 @@
 mat-expansion-panel-header {
   width: 100% !important;
 }
+
 mat-panel-title {
   display: flex !important;
   justify-content: space-between !important;
 }
-.material-symbols-outlined {
-  margin-right: 20px;
-}
+
 mat-card-content {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
 }
+
 mat-card {
   margin: 10px 0;
 }
+
 .edit {
-  color: orange;
+  background-color: #61BD5F;
+  color: white;
 }
 
 .delete {
-  color: red;
+  background-color: #BB4141;
+  color: white;
+}
+
+button {
+  margin: 0px 10px 10px 0px;
 }

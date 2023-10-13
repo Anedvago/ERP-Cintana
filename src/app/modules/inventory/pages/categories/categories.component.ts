@@ -25,15 +25,15 @@ export class CategoriesComponent {
   public servicesDepartaments: any[] = [];
   public servicesSections: any[] = [];
   public servicesFamilies: any[] = [];
-  public newCategory = { type: "", category: "", departament: "", section: "", name: "" };
+  public newCategory = { id: 0, type: "", category: "", departament: "", section: "", name: "" };
 
   constructor(private categoryService: CategoryService,
     public dialog: MatDialog) {
     this.getAllArticlesDepartaments();
-    this.getAllArticlesSections();
-    this.getAllArticlesFamilies();
     this.getAllServicesDepartaments();
+    this.getAllArticlesSections();
     this.getAllServicesSections();
+    this.getAllArticlesFamilies();
     this.getAllServicesFamilies();
   }
 
@@ -113,9 +113,14 @@ export class CategoriesComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result != undefined) {
         this.newCategory = result;
-        this.insertCategory();
+        if (this.newCategory.id == 0) {
+          this.insertCategory();
+        } else {
+          this.updateCategory()
+        }
+
       } else {
-        this.newCategory = { type: "", category: "", departament: "", section: "", name: "" };
+        this.newCategory = { id: 0, type: "", category: "", departament: "", section: "", name: "" };
       }
     });
   }
@@ -140,6 +145,86 @@ export class CategoriesComponent {
         this.getAllServicesFamilies();
       })
     }
-    this.newCategory = { type: "", category: "", departament: "", section: "", name: "" };
+    this.newCategory = { id: 0, type: "", category: "", departament: "", section: "", name: "" };
+  }
+
+  public updateCategory() {
+    if (this.newCategory.category === "DEPARTAMENTO") {
+      this.categoryService.updateDepartament(this.newCategory.id, this.newCategory.type, this.newCategory.name).then((data) => {
+        this.getAllArticlesDepartaments();
+        this.getAllServicesDepartaments();
+      })
+    }
+    if (this.newCategory.category === "SECCION") {
+      this.categoryService.updateSection(this.newCategory.id, this.newCategory.type, this.newCategory.departament, this.newCategory.name).then((data) => {
+        this.getAllArticlesSections();
+        this.getAllServicesSections();
+      })
+    }
+    if (this.newCategory.category === "FAMILIA") {
+      console.log(this.newCategory);
+      this.categoryService.insertFamily(this.newCategory.type, this.newCategory.departament, this.newCategory.section, this.newCategory.name).then((data) => {
+        this.getAllArticlesFamilies();
+        this.getAllServicesFamilies();
+      })
+    }
+    this.newCategory = { id: 0, type: "", category: "", departament: "", section: "", name: "" };
+  }
+
+  public editCategory(event: any) {
+    switch (event.type) {
+      case "DEPARTAMENTO":
+        const dpto = this.articlesDepartaments.filter((elem) => {
+          return elem.id == event.id
+        })[0]
+        this.newCategory.id = dpto.id;
+        this.newCategory.name = dpto.name;
+        this.newCategory.category = event.type;
+        this.newCategory.type = dpto.type;
+        this.openDialog();
+        break;
+      case "SECCION":
+        let section;
+        for (let i = 0; i < this.articlesSections.length; i++) {
+          const gSection = this.articlesSections[i];
+          for (let j = 0; j < gSection.length; j++) {
+            const scc = this.articlesSections[i][j];
+            if (scc.id == event.id) {
+              section = scc
+            }
+          }
+        }
+        this.newCategory.id = section.id;
+        this.newCategory.name = section.name;
+        this.newCategory.category = event.type;
+        this.newCategory.type = section.type;
+        this.newCategory.departament = section.departament;
+        this.openDialog();
+        break;
+      case "FAMILIA":
+
+        break;
+    }
+  }
+
+  public deleteCategory(event: any) {
+    switch (event.type) {
+      case "DEPARTAMENTO":
+        const dpto = this.articlesDepartaments.filter((elem) => {
+          return elem.id == event.id
+        })[0]
+        this.newCategory.id = dpto.id;
+        this.newCategory.name = dpto.name;
+        this.newCategory.category = event.type;
+        this.newCategory.type = dpto.type;
+        this.openDialog();
+        break;
+      case "SECCION":
+
+        break;
+      case "FAMILIA":
+
+        break;
+    }
   }
 }

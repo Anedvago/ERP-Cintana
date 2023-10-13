@@ -39,8 +39,19 @@ export class CategoryService {
     const { data, error } = await this.supabaseClient
       .from('Departaments')
       .insert([
-        { type: type, name: name },
+        { type: type, name: name }
       ])
+      .select()
+
+    return data;
+  }
+
+  public async updateDepartament(id: number, type: string, name: string): Promise<any[] | null> {
+    const { data, error } = await this.supabaseClient
+      .from('Departaments')
+      .update([
+        { type: type, name: name }
+      ]).eq('id', id)
       .select()
 
     return data;
@@ -72,6 +83,17 @@ export class CategoryService {
       .insert([
         { type: type, departament: departament, name: name },
       ])
+      .select()
+
+    return data;
+  }
+
+  public async updateSection(id:number,type: string, departament: string, name: string): Promise<any[] | null> {
+    const { data, error } = await this.supabaseClient
+      .from('Sections')
+      .update([
+        { type: type, departament: departament, name: name },
+      ]).eq('id', id)
       .select()
 
     return data;

@@ -15,7 +15,8 @@
             </mat-form-field>
             <mat-form-field *ngIf="data.newCategory.category == 'SECCION'||data.newCategory.category == 'FAMILIA'">
                 <mat-label>Departamento</mat-label>
-                <mat-select (selectionChange)="filterSection()" [(ngModel)]="data.newCategory.departament" name="data.newCategory.departament">
+                <mat-select (selectionChange)="filterSection()" [(ngModel)]="data.newCategory.departament"
+                    name="data.newCategory.departament">
                     <mat-option
                         *ngFor="let dpto of data.newCategory.type == 'A'?articlesDepartaments:servicesDepartaments"
                         [value]="dpto.id"> {{dpto.name|titlecase}}
@@ -25,7 +26,8 @@
             <mat-form-field *ngIf="data.newCategory.category == 'FAMILIA' ">
                 <mat-label>Seccion</mat-label>
                 <mat-select [(ngModel)]="data.newCategory.section" name="data.newCategory.section">
-                    <mat-option *ngFor="let scc of data.newCategory.type == 'A'? filteredArtilcesSections : servicesSections"
+                    <mat-option
+                        *ngFor="let scc of data.newCategory.type == 'A'? filteredArtilcesSections : servicesSections"
                         [value]="scc.id"> {{scc.name|titlecase}}
                     </mat-option>
                 </mat-select>
@@ -39,8 +41,15 @@
     </div>
     <div class="contButton">
         <app-button-blue [mat-dialog-close]="data.newCategory"
-            *ngIf="data.newCategory.category == 'DEPARTAMENTO'|| data.newCategory.category == 'SECCION'||data.newCategory.category == 'FAMILIA'">Crear
-            nueva categoria</app-button-blue>
+            *ngIf="data.newCategory.category == 'DEPARTAMENTO'|| data.newCategory.category == 'SECCION'||data.newCategory.category == 'FAMILIA'">
+            <span *ngIf="data.newCategory.id == 0">Crear nueva categoria</span>
+            <span *ngIf="data.newCategory.id != 0">Guardar categoria</span>
+        </app-button-blue>
+       <!--  <app-button-blue [mat-dialog-close]="data.newCategory" *ngIf="data.newCategory.category == 'DEPARTAMENTO'|| 
+            data.newCategory.category == 'SECCION'||
+            data.newCategory.category == 'FAMILIA'">
+            Crear nueva categoria
+        </app-button-blue> -->
     </div>
 
 
