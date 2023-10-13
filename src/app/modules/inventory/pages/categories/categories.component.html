@@ -28,12 +28,12 @@
   <main>
     <section>
       <h4>Categorias de articulos</h4>
-      <app-accordion-categori [departaments]="departamentHandler.articlesDptos"
+      <app-accordion-categori (editCategory)="openDialog()"  [departaments]="departamentHandler.articlesDptos"
         [sections]="sectionHandler.ArticlesSections" [families]="familyHandler.articlesFamilies" />
     </section>
     <section>
       <h4>Categorias de servicios</h4>
-      <app-accordion-categori [departaments]="departamentHandler.servicesDptos"
+      <app-accordion-categori (editCategory)="openDialog()" [departaments]="departamentHandler.servicesDptos"
         [sections]="sectionHandler.servicesSections" [families]="familyHandler.servicesFamilies" />
     </section>
   </main>

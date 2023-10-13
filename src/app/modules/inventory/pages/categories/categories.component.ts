@@ -65,14 +65,43 @@ export class CategoriesComponent {
   }
 
   public updateCategory(): void {
-
+    switch (this.newCategory.depth) {
+      case "DEPARTAMENTO":
+        this.departamentHandler.updateCategory(this.newCategory)
+        break;
+      case "SECCION":
+        this.sectionHandler.updateCategory(this.newCategory)
+        break;
+      case "FAMILIA":
+        this.familyHandler.updateCategory(this.newCategory)
+        break;
+    }
+    this.cleanNewCategory();
   }
 
   public cleanNewCategory(): void {
     this.newCategory = { id: 0, name: "", departament: "", type: "", section: "", depth: "" }
   }
 
+  public editCateory(event: any) {
+    console.log(event);
+    console.log(this.newCategory);
+    this.newCategory.id
+    
+    /* switch (event.depth) {
+      case "DEPARTAMENTO":
+        this.departamentHandler.updateCategory(this.newCategory)
+        break;
+      case "SECCION":
+        this.sectionHandler.updateCategory(this.newCategory)
+        break;
+      case "FAMILIA":
+        this.familyHandler.updateCategory(this.newCategory)
+        break;
+    } */
+    this.cleanNewCategory();
 
+  }
 
 
 }

@@ -33,4 +33,8 @@ export class DepartamentHandler implements CategoryHandler {
     updateCategory(category: Category): void {
         this.categoryService.updateDepartament(category.id, category.type, category.name);
     }
+
+    getCategoryById(id:number, type:number){
+        
+    }
 }

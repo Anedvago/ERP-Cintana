@@ -42,7 +42,10 @@ export class SectionHandler implements CategoryHandler {
     }
 
     insertCategory(category: Category): void {
-        this.categoryService.insertSection(category.type, category.departament!, category.name);
+        this.categoryService.insertSection(category.type, category.departament!, category.name).then(() => {
+            this.getAllArticlesCategories()
+            this.getAllServicesCategories()
+        })
     }
 
     updateCategory(category: Category): void {

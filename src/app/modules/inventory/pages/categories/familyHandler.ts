@@ -42,7 +42,10 @@ export class FamilyHandler implements CategoryHandler {
     }
 
     insertCategory(category: Category): void {
-        this.categoryService.insertFamily(category.type, category.departament!, category.section!, category.name);
+        this.categoryService.insertFamily(category.type, category.departament!, category.section!, category.name).then(() => {
+            this.getAllArticlesCategories()
+            this.getAllServicesCategories()
+        })
     }
 
     updateCategory(category: Category): void {

@@ -19,15 +19,15 @@ export class AccordionCategoriComponent {
   @Input()
   public families!: any[];
   @Output()
-  public editCategory: EventEmitter<{id:number,type:string}> = new EventEmitter<{id:number,type:string}>();
+  public editCategory: EventEmitter<{ id: number, depth: string, type: string }> = new EventEmitter<{ id: number, depth: string, type: string }>();
   @Output()
-  public deleteCategory: EventEmitter<{id:number,type:string}> = new EventEmitter<{id:number,type:string}>();
+  public deleteCategory: EventEmitter<{ id: number, depth: string, type: string }> = new EventEmitter<{ id: number, depth: string, type: string }>();
 
-  public emitEditCategory(id:number,type:string) {
-    this.editCategory.emit({id:id,type:type});
+  public emitEditCategory(id: number, depth: string, type: string) {
+    this.editCategory.emit({ id: id, depth: depth, type: type });
   }
 
-  public emitDeleteCategory(id:number,type:string) {
-    this.deleteCategory.emit({id:id,type:type});
+  public emitDeleteCategory(id: number, depth: string, type: string) {
+    this.deleteCategory.emit({ id: id, depth: depth, type: type });
   }
 }

@@ -6,10 +6,10 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <span class="cont-btn">
-      <button mat-raised-button class="edit" (click)="emitEditCategory(dpto.id,'DEPARTAMENTO')">
+      <button mat-raised-button class="edit" (click)="emitEditCategory(dpto.id,'DEPARTAMENTO',dpto.type)">
         Editar
       </button>
-      <button mat-raised-button class="delete" (click)="emitDeleteCategory(dpto.id,'DEPARTAMENTO')">
+      <button mat-raised-button class="delete" (click)="emitDeleteCategory(dpto.id,'DEPARTAMENTO',dpto.type)">
         Eliminar
       </button>
       <hr>
@@ -24,10 +24,10 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <span class="cont-btn">
-              <button mat-raised-button class="edit" (click)="emitEditCategory(scc.id,'SECCION')">
+              <button mat-raised-button class="edit" (click)="emitEditCategory(scc.id,'SECCION',scc.type)">
                 Editar
               </button>
-              <button mat-raised-button class="delete" (click)="emitDeleteCategory(scc.id,'SECCION')">
+              <button mat-raised-button class="delete" (click)="emitDeleteCategory(scc.id,'SECCION',scc.type)">
                 Eliminar
               </button>
               <hr>
@@ -42,10 +42,10 @@
                       </mat-panel-title>
                     </mat-expansion-panel-header>
                     <span class="cont-btn">
-                      <button mat-raised-button class="edit" (click)="emitEditCategory(fam.id,'FAMILIA')">
+                      <button mat-raised-button class="edit" (click)="emitEditCategory(fam.id,'FAMILIA',fam.type)">
                         Editar
                       </button>
-                      <button mat-raised-button class="delete" (click)="emitDeleteCategory(fam.id,'FAMILIA')">
+                      <button mat-raised-button class="delete" (click)="emitDeleteCategory(fam.id,'FAMILIA',fam.type)">
                         Eliminar
                       </button>
                     </span>
