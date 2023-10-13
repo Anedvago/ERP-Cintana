@@ -1,18 +1,48 @@
 <mat-accordion>
   <mat-expansion-panel *ngFor="let dpto of departaments">
     <mat-expansion-panel-header>
-      <mat-panel-title> {{ dpto.name | titlecase }} </mat-panel-title>
+      <mat-panel-title>
+        <span> {{ dpto.name | titlecase }}</span>
+        <div>
+          <span
+            class="material-symbols-outlined edit"
+            (click)="emitEditCategory()"
+          >
+            edit
+          </span>
+          <span
+            class="material-symbols-outlined delete"
+            (click)="emitDeleteCategory()"
+          >
+            delete
+          </span>
+        </div>
+      </mat-panel-title>
     </mat-expansion-panel-header>
     <div *ngFor="let section of sections">
       <div *ngFor="let scc of section">
         <mat-expansion-panel *ngIf="scc.departament == dpto.id">
           <mat-expansion-panel-header>
-            <mat-panel-title> {{ scc.name | titlecase }} </mat-panel-title>
+            <mat-panel-title>
+              <span>{{ scc.name | titlecase }} </span>
+              <div>
+                <span class="material-symbols-outlined"> edit </span>
+                <span class="material-symbols-outlined"> delete </span>
+              </div>
+            </mat-panel-title>
           </mat-expansion-panel-header>
           <div *ngFor="let family of families">
             <div *ngFor="let fam of family">
               <mat-card *ngIf="fam.section == scc.id">
-                <mat-card-content>{{fam.name}}</mat-card-content>
+                <mat-card-content>
+                  <span>
+                    {{ fam.name }}
+                  </span>
+                  <div>
+                    <span class="material-symbols-outlined"> edit </span>
+                    <span class="material-symbols-outlined"> delete </span>
+                  </div>
+                </mat-card-content>
               </mat-card>
             </div>
           </div>
