@@ -1,40 +1,29 @@
-<!-- <div class="container">
-  <header>
-    <div class="btn">
-      <app-button-blue (pressClick)="openDialog()">Crear Categoria</app-button-blue>
-    </div>
-  </header>
-  <main>
-    <section>
-      <h4>Categorias de articulos</h4>
-      <app-accordion-categori (editCategory)="editCategory($event)" (deleteCategory)="deleteCategory($event)"
-        [departaments]="articlesDepartaments" [sections]="articlesSections" [families]="articlesFamilies" />
-    </section>
-    <section>
-      <h4>Categorias de servicios</h4>
-      <app-accordion-categori (editCategory)="editCategory($event)" (deleteCategory)="deleteCategory($event)"
-        [departaments]="servicesDepartaments" [sections]="servicesSections" [families]="servicesFamilies" />
-    </section>
-  </main>
-</div>
- -->
-
 <div class="container">
   <header>
     <div class="btn">
-      <app-button-blue (pressClick)="openDialog()">Crear Categoria</app-button-blue>
+      <app-button-blue (pressClick)="openDialog()"
+        >Crear Categoria</app-button-blue
+      >
     </div>
   </header>
   <main>
     <section>
       <h4>Categorias de articulos</h4>
-      <app-accordion-categori (editCategory)="openDialog()"  [departaments]="departamentHandler.articlesDptos"
-        [sections]="sectionHandler.ArticlesSections" [families]="familyHandler.articlesFamilies" />
+      <app-accordion-categori
+        (editCategory)="editCategory($event)"
+        [departaments]="departamentHandler.articlesDptos"
+        [sections]="sectionHandler.articlesSections"
+        [families]="familyHandler.articlesFamilies"
+      />
     </section>
     <section>
       <h4>Categorias de servicios</h4>
-      <app-accordion-categori (editCategory)="openDialog()" [departaments]="departamentHandler.servicesDptos"
-        [sections]="sectionHandler.servicesSections" [families]="familyHandler.servicesFamilies" />
+      <app-accordion-categori
+        (editCategory)="editCategory($event)"
+        [departaments]="departamentHandler.servicesDptos"
+        [sections]="sectionHandler.servicesSections"
+        [families]="familyHandler.servicesFamilies"
+      />
     </section>
   </main>
 </div>
