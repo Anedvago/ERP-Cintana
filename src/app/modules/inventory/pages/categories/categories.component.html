@@ -11,6 +11,7 @@
       <h4>Categorias de articulos</h4>
       <app-accordion-categori
         (editCategory)="editCategory($event)"
+        (deleteCategory)="deleteCategory($event)"
         [departaments]="departamentHandler.articlesDptos"
         [sections]="sectionHandler.articlesSections"
         [families]="familyHandler.articlesFamilies"
@@ -20,6 +21,7 @@
       <h4>Categorias de servicios</h4>
       <app-accordion-categori
         (editCategory)="editCategory($event)"
+        (deleteCategory)="deleteCategory($event)"
         [departaments]="departamentHandler.servicesDptos"
         [sections]="sectionHandler.servicesSections"
         [families]="familyHandler.servicesFamilies"

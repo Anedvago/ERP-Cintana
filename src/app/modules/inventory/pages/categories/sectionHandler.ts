@@ -88,4 +88,11 @@ export class SectionHandler implements CategoryHandler {
     }
     return section!;
   }
+
+  deleteCategory(id: number): void {
+    this.categoryService.deleteSection(id).then(() => {
+      this.getAllArticlesCategories();
+      this.getAllServicesCategories();
+    });
+ }
 }

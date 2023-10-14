@@ -95,4 +95,11 @@ export class FamilyHandler implements CategoryHandler {
     }
     return section!;
   }
+
+  deleteCategory(id: number): void {
+    this.categoryService.deleteFamily(id).then(() => {
+      this.getAllArticlesCategories();
+      this.getAllServicesCategories();
+    });
+ }
 }

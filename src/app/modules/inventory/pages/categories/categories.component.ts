@@ -88,6 +88,21 @@ export class CategoriesComponent {
     this.cleanNewCategory();
   }
 
+  public deleteCategory(event:any): void {
+    switch (event.depth) {
+      case 'DEPARTAMENTO':
+        this.departamentHandler.deleteCategory(event.id);
+        break;
+      case 'SECCION':
+        this.sectionHandler.deleteCategory(event.id);
+        break;
+      case 'FAMILIA':
+        this.familyHandler.deleteCategory(event.id);
+        break;
+    }
+    this.cleanNewCategory();
+  }
+
   public cleanNewCategory(): void {
     this.newCategory = {
       id: 0,

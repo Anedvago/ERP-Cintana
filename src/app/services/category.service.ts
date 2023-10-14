@@ -61,6 +61,17 @@ export class CategoryService {
     return data;
   }
 
+  public async deleteDepartament(
+    id: number
+  ): Promise<any | null> {
+    const { error } = await this.supabaseClient
+      .from('Departaments')
+      .delete()
+      .eq('id', id)
+
+    return error;
+  }
+
   //Sections
 
   public async getAllArticlesSections(): Promise<any[] | null> {
@@ -105,6 +116,17 @@ export class CategoryService {
       .select();
 
     return data;
+  }
+
+  public async deleteSection(
+    id: number
+  ): Promise<any | null> {
+    const { error } = await this.supabaseClient
+      .from('Sections')
+      .delete()
+      .eq('id', id)
+
+    return error;
   }
 
   //Families
@@ -156,5 +178,15 @@ export class CategoryService {
       .select();
 
     return data;
+  }
+  public async deleteFamily(
+    id: number
+  ): Promise<any | null> {
+    const { error } = await this.supabaseClient
+      .from('Families')
+      .delete()
+      .eq('id', id)
+
+    return error;
   }
 }

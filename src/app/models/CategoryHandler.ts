@@ -6,5 +6,5 @@ export interface CategoryHandler {
   insertCategory(category: Category): void;
   updateCategory(category: Category): void;
   getCategoryById(id: number, type: string): Category;
-  /* deleteCategory(id: number): void; */
+  deleteCategory(id: number): void;
 }
