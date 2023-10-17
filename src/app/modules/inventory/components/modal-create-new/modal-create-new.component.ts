@@ -7,6 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { CategoryService } from 'src/app/services/category.service';
 import { FormsModule } from '@angular/forms';
 import { ButtonBlueComponent } from 'src/app/shared/button-blue/button-blue.component';
+import { ArticleService } from 'src/app/services/article.service';
 
 @Component({
   selector: 'app-modal-create-new',
@@ -25,7 +26,7 @@ export class ModalCreateNewComponent {
   constructor(
     public dialogRef: MatDialogRef<ModalCreateNewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private categoryService: CategoryService
+    private categoryService: CategoryService, private articleService: ArticleService
   ) {
     this.getAllDepartaments();
     this.getAllSections();
@@ -64,5 +65,9 @@ export class ModalCreateNewComponent {
     this.categoryService.getAllArticlesFamilies().then((data: any) => {
       this.families = data;
     })
+  }
+
+  public deleteArticle() {
+    this.articleService.deleteArticle(this.data.newArticle.id).then(()=>{})
   }
 }

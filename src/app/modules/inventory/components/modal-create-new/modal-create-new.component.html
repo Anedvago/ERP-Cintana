@@ -51,9 +51,18 @@
     </form>
 
     <div class="botonera">
-        <app-button-blue [mat-dialog-close]="data.newArticle">
+        <!-- <app-button-blue [mat-dialog-close]="data.newArticle">
             <span *ngIf="data.newArticle.id == 0">Crear nueva categoria</span>
-            <span *ngIf="data.newArticle.id != 0">Guardar categoria</span>
+            <span >Guardar categoria</span>
+        </app-button-blue> -->
+        <app-button-blue *ngIf="data.newArticle.id == 0" [mat-dialog-close]="data.newArticle">
+            Crear nuevo articulo
+        </app-button-blue>
+        <app-button-blue *ngIf="data.newArticle.id != 0" [mat-dialog-close]="data.newArticle">
+            Guardar Articulo
+        </app-button-blue>
+        <app-button-blue (pressClick)="deleteArticle()" class="delete" *ngIf="data.newArticle.id != 0" [mat-dialog-close]="data.newArticle">
+            Eliminar
         </app-button-blue>
     </div>
 </div>

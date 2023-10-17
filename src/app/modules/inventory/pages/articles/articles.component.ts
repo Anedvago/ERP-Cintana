@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { TableComponent } from 'src/app/shared/table/table.component';
 import { ArticleService } from 'src/app/services/article.service';
 import { FormArticlesComponent } from '../../components/form-articles/form-articles.component';
-import { ModalComponent } from 'src/app/shared/modal/modal.component';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { ModalCreateNewComponent } from '../../components/modal-create-new/modal-create-new.component';
 import { Article } from 'src/app/models/Article';
@@ -36,7 +35,7 @@ export class ArticlesComponent {
     'family',
   ];
 
-  public newArticle?: Article = { id: 0, ref: "", name: "", value: 0, stock: 0, dpto: 0, section: 0, family: 0 };
+  public newArticle?: Article = { ref: "", name: "", value: 0, stock: 0, dpto: 0, section: 0, family: 0 };
 
   public rows: any[] = [];
   public filterRows: any[] = [];
@@ -86,7 +85,7 @@ export class ArticlesComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result != undefined) {
         this.newArticle = result;
-        if (this.newArticle!.id == 0) {
+        if (this.newArticle!.id == 0 || this.newArticle!.id == undefined) {
           this.insertNewArticle();
         } else {
           this.updateArticle();
@@ -104,15 +103,16 @@ export class ArticlesComponent {
     this.openDialog()
   }
 
-  cleanArticle(){
-    this.newArticle = { id: 0, ref: "", name: "", value: 0, stock: 0, dpto: 0, section: 0, family: 0 };
+  cleanArticle() {
+    this.newArticle = { ref: "", name: "", value: 0, stock: 0, dpto: 0, section: 0, family: 0 };
   }
 
-  insertNewArticle(){
+  insertNewArticle() {
+    this.articlesService.insertNewArticle(this.newArticle!).then(() => { this.getArticles() })
 
   }
 
-  updateArticle(){
-
+  updateArticle() {
+    this.articlesService.updateArticle(this.newArticle!).then(() => { this.getArticles() })
   }
 }

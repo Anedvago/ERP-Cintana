@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { SupabaseClient, User, createClient } from '@supabase/supabase-js';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
+import { Article } from '../models/Article';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +31,38 @@ export class ArticleService {
   public async getAllArticles(): Promise<any[] | null> {
     let { data: Rooms, error } = await this.supabaseClient
       .from('Articles')
+      .select('*').order("id", { "ascending": true });;
+    return Rooms;
+  }
+
+  public async insertNewArticle(article: Article): Promise<any[] | null> {
+    let { data: Rooms, error } = await this.supabaseClient
+      .from('Articles')
+      .insert([{ref: article.ref, name:article.name}])
+      .select('*')
+
+      console.log(error);
+      
+    return Rooms;
+  }
+
+  public async updateArticle(article: Article): Promise<any[] | null> {
+    let { data: Rooms, error } = await this.supabaseClient
+      .from('Articles')
+      .update([article])
+      .eq('id', article.id)
       .select('*');
     return Rooms;
+  }
+
+  public async deleteArticle(
+    id: number
+  ): Promise<any | null> {
+    const { error } = await this.supabaseClient
+      .from('Articles')
+      .delete()
+      .eq('id', id)
+
+    return error;
   }
 }
