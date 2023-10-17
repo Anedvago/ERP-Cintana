@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatChipsModule } from '@angular/material/chips';
+import { Article } from 'src/app/models/Article';
 
 @Component({
   selector: 'app-table',
@@ -17,9 +18,11 @@ export class TableComponent {
   public columnsDisplay: any[] = [];
   @Input()
   public data: any[] = [];
+  @Output()
+  public clickTr: EventEmitter<Article> = new EventEmitter<Article>();
 
-  public openModal(elem:any){
-    console.log(elem);
-    
+  public emitClickTr(elem: any) {
+    //console.log(elem);
+    this.clickTr.emit(elem)
   }
 }

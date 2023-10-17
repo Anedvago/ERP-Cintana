@@ -45,5 +45,5 @@
     class="sticky"
     position="sticky"
   ></tr>
-  <tr mat-row *matRowDef="let row; columns: columns" (click)="openModal(row)"></tr>
+  <tr mat-row *matRowDef="let row; columns: columns" (click)="emitClickTr(row)"></tr>
 </table>

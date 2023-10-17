@@ -1,15 +1,23 @@
 import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { CategoryService } from 'src/app/services/category.service';
+import { FormsModule } from '@angular/forms';
+import { ButtonBlueComponent } from 'src/app/shared/button-blue/button-blue.component';
 
 @Component({
   selector: 'app-modal-create-new',
   standalone: true,
-  imports: [CommonModule, MatFormFieldModule, MatInputModule, MatSelectModule],
+  imports: [CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    FormsModule,
+    ButtonBlueComponent,
+    MatDialogModule],
   templateUrl: './modal-create-new.component.html',
   styleUrls: ['./modal-create-new.component.css']
 })
@@ -17,7 +25,7 @@ export class ModalCreateNewComponent {
   constructor(
     public dialogRef: MatDialogRef<ModalCreateNewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private categoryService:CategoryService
+    private categoryService: CategoryService
   ) {
     this.getAllDepartaments();
     this.getAllSections();

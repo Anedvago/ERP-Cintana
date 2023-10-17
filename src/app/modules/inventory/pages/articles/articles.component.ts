@@ -4,8 +4,9 @@ import { TableComponent } from 'src/app/shared/table/table.component';
 import { ArticleService } from 'src/app/services/article.service';
 import { FormArticlesComponent } from '../../components/form-articles/form-articles.component';
 import { ModalComponent } from 'src/app/shared/modal/modal.component';
-import { MatDialogModule,MatDialog } from '@angular/material/dialog';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { ModalCreateNewComponent } from '../../components/modal-create-new/modal-create-new.component';
+import { Article } from 'src/app/models/Article';
 @Component({
   selector: 'app-articles',
   standalone: true,
@@ -35,10 +36,12 @@ export class ArticlesComponent {
     'family',
   ];
 
+  public newArticle?: Article = { id: 0, ref: "", name: "", value: 0, stock: 0, dpto: 0, section: 0, family: 0 };
+
   public rows: any[] = [];
   public filterRows: any[] = [];
 
-  constructor(private articlesService: ArticleService,public dialog:MatDialog) {
+  constructor(private articlesService: ArticleService, public dialog: MatDialog) {
     this.getArticles();
   }
 
@@ -77,11 +80,39 @@ export class ArticlesComponent {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalCreateNewComponent, {
-      data: {},
+      data: { newArticle: this.newArticle },
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      if (result != undefined) {
+        this.newArticle = result;
+        if (this.newArticle!.id == 0) {
+          this.insertNewArticle();
+        } else {
+          this.updateArticle();
+        }
+      } else {
+        this.cleanArticle();
+      }
     });
+  }
+
+  editArticle(article: Article) {
+    this.newArticle = article;
+    console.log(this.newArticle);
+
+    this.openDialog()
+  }
+
+  cleanArticle(){
+    this.newArticle = { id: 0, ref: "", name: "", value: 0, stock: 0, dpto: 0, section: 0, family: 0 };
+  }
+
+  insertNewArticle(){
+
+  }
+
+  updateArticle(){
+
   }
 }
