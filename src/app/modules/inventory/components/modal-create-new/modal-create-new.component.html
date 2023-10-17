@@ -1,5 +1,5 @@
 <div class="container">
-    <form>
+    <form *ngIf="data.newArticle != undefined">
         <div>
             <mat-form-field>
                 <mat-label>Codigo</mat-label>
@@ -50,11 +50,8 @@
         </div>
     </form>
 
+
     <div class="botonera">
-        <!-- <app-button-blue [mat-dialog-close]="data.newArticle">
-            <span *ngIf="data.newArticle.id == 0">Crear nueva categoria</span>
-            <span >Guardar categoria</span>
-        </app-button-blue> -->
         <app-button-blue *ngIf="data.newArticle.id == 0" [mat-dialog-close]="data.newArticle">
             Crear nuevo articulo
         </app-button-blue>

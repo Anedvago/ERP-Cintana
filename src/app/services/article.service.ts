@@ -38,7 +38,7 @@ export class ArticleService {
   public async insertNewArticle(article: Article): Promise<any[] | null> {
     let { data: Rooms, error } = await this.supabaseClient
       .from('Articles')
-      .insert([{ref: article.ref, name:article.name}])
+      .insert([article])
       .select('*')
 
       console.log(error);

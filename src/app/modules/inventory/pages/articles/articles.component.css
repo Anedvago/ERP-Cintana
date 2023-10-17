@@ -9,7 +9,7 @@
 app-table {
   width: 95%;
   height: 77%;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 app-form-articles {
   width: 90%;

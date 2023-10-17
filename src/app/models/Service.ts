@@ -1,9 +1,7 @@
-export interface Article {
+export interface Service {
     id?: number;
-    ref: string;
     name: string;
     value: number;
-    stock: number;
     dpto?: number;
     section?: number;
     family?: number;
