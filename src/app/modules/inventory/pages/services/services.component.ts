@@ -5,12 +5,12 @@ import { FormArticlesComponent } from '../../components/form-articles/form-artic
 import { ServicesService } from 'src/app/services/services.service';
 import { Service } from 'src/app/models/Service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { ModalCreateNewComponent } from '../../components/modal-create-new/modal-create-new.component';
+import { ModalCreateNewServiceComponent } from '../../components/modal-create-new-service/modal-create-new-service.component';
 
 @Component({
   selector: 'app-services',
   standalone: true,
-  imports: [CommonModule, TableComponent, FormArticlesComponent, MatDialogModule, ModalCreateNewComponent],
+  imports: [CommonModule, TableComponent, FormArticlesComponent, MatDialogModule, ModalCreateNewServiceComponent ],
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.css'],
 })
@@ -34,7 +34,7 @@ export class ServicesComponent {
 
   public rows: any[] = [];
   public filterRows: any[] = [];
-  public newArticle?: Service = {  name: "", value: 0, dpto: 0, section: 0, family: 0 };
+  public newService?: Service = {  name: "", value: 0, dpto: 0, section: 0, family: 0 };
 
   constructor(private servicesService: ServicesService,public dialog: MatDialog) {
     this.getServices();
@@ -74,41 +74,42 @@ export class ServicesComponent {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(ModalCreateNewComponent, {
-      data: { newArticle: this.newArticle },
+    const dialogRef = this.dialog.open(ModalCreateNewServiceComponent, {
+      data: { newService: this.newService },
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result != undefined) {
-        this.newArticle = result;
-        if (this.newArticle!.id == 0 || this.newArticle!.id == undefined) {
-          this.insertnewArticle();
+        this.newService = result;
+        if (this.newService!.id == 0 || this.newService!.id == undefined) {
+          this.insertnewService();
         } else {
-          this.updateArticle();
+          this.updateService();
         }
       } else {
-        this.cleanArticle();
+        this.cleanService();
       }
     });
   }
 
   editArticle(article: Service) {
-    this.newArticle = article;
-    console.log(this.newArticle);
+    this.newService = article;
+    console.log(this.newService);
 
     this.openDialog()
   }
 
-  cleanArticle() {
-    this.newArticle = { name: "", value: 0, dpto: 0, section: 0, family: 0 };
+  cleanService() {
+    this.newService = { name: "", value: 0, dpto: 0, section: 0, family: 0 };
   }
 
-  insertnewArticle() {
-    this.servicesService.insertNewService(this.newArticle!).then(() => { this.getServices() })
+  insertnewService() {
+    console.log(this.newService);
+    this.servicesService.insertNewService(this.newService!).then(() => { this.getServices() })
 
   }
 
-  updateArticle() {
-    this.servicesService.updateService(this.newArticle!).then(() => { this.getServices() })
+  updateService() {
+    this.servicesService.updateService(this.newService!).then(() => { this.getServices() })
   }
 }

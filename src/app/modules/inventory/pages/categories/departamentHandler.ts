@@ -26,7 +26,7 @@ export class DepartamentHandler implements CategoryHandler {
 
     insertCategory(category: Category): void {
         this.categoryService
-            .insertDepartament(category.type, category.name)
+            .insertDepartament(category.type, category.name.toUpperCase())
             .then(() => {
                 this.getAllArticlesCategories();
                 this.getAllServicesCategories();
@@ -35,7 +35,7 @@ export class DepartamentHandler implements CategoryHandler {
 
     updateCategory(category: Category): void {
         this.categoryService
-            .updateDepartament(category.id, category.type, category.name)
+            .updateDepartament(category.id, category.type, category.name.toUpperCase())
             .then(() => {
                 this.getAllArticlesCategories();
                 this.getAllServicesCategories();

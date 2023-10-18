@@ -27,7 +27,7 @@ export class FamilyHandler implements CategoryHandler {
   }
 
   getAllServicesCategories() {
-    this.categoryService.getAllArticlesFamilies().then((data: any) => {
+    this.categoryService.getAllServicesFamilies().then((data: any) => {
       this.servicesFamilies = Object.values(
         data.reduce((acc: any, objeto: any) => {
           const section = objeto.section;
@@ -47,7 +47,7 @@ export class FamilyHandler implements CategoryHandler {
         category.type,
         category.departament!,
         category.section!,
-        category.name
+        category.name.toUpperCase()
       )
       .then(() => {
         this.getAllArticlesCategories();
@@ -62,7 +62,7 @@ export class FamilyHandler implements CategoryHandler {
         category.type,
         category.departament!,
         category.section!,
-        category.name
+        category.name.toUpperCase()
       )
       .then(() => {
         this.getAllArticlesCategories();
@@ -83,10 +83,10 @@ export class FamilyHandler implements CategoryHandler {
         }
       }
     } else {
-      for (let i = 0; i < this.articlesFamilies.length; i++) {
-        const gSection = this.articlesFamilies[i];
+      for (let i = 0; i < this.servicesFamilies.length; i++) {
+        const gSection = this.servicesFamilies[i];
         for (let j = 0; j < gSection.length; j++) {
-          const scc = this.articlesFamilies[i][j];
+          const scc = this.servicesFamilies[i][j];
           if (scc.id == id) {
             section = scc;
           }

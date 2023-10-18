@@ -23,7 +23,7 @@ export class AccordionCategoriComponent {
   @Output()
   public deleteCategory: EventEmitter<{ id: number, depth: string, type: string }> = new EventEmitter<{ id: number, depth: string, type: string }>();
 
-  public emitEditCategory(id: number, depth: string, type: string) {
+  public emitEditCategory(id: number, depth: string, type: string) {       
     this.editCategory.emit({ id: id, depth: depth, type: type });
   }
 

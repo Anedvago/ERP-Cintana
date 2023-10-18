@@ -115,8 +115,6 @@ export class CategoriesComponent {
   }
 
   public editCategory(event: any) {
-    console.log(event);
-
     switch (event.depth) {
       case 'DEPARTAMENTO':
         this.newCategory = this.departamentHandler.getCategoryById(
@@ -137,8 +135,9 @@ export class CategoriesComponent {
         );
         break;
     }
-    this.newCategory.depth = event.depth;
     console.log(this.newCategory);
+    
+    this.newCategory.depth = event.depth;
     this.openDialog();
     this.cleanNewCategory();
   }

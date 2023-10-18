@@ -152,13 +152,15 @@ export class CategoryService {
     section: string,
     name: string
   ): Promise<any[] | null> {
+    
+    
     const { data, error } = await this.supabaseClient
       .from('Families')
       .insert([
         { type: type, departament: departament, section: section, name: name },
       ])
       .select();
-
+      console.log(error);
     return data;
   }
 

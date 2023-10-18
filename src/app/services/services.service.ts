@@ -28,9 +28,10 @@ export class ServicesService {
   public async insertNewService(service: Service): Promise<any[] | null> {
     let { data: Rooms, error } = await this.supabaseClient
       .from('Services')
-      .insert([{service}])
+      .insert([service])
       .select('*')
-
+    console.log(service);
+    
       console.log(error);
       
     return Rooms;

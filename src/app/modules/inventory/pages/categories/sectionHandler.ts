@@ -43,7 +43,7 @@ export class SectionHandler implements CategoryHandler {
 
   insertCategory(category: Category): void {
     this.categoryService
-      .insertSection(category.type, category.departament!, category.name)
+      .insertSection(category.type, category.departament!, category.name.toUpperCase())
       .then(() => {
         this.getAllArticlesCategories();
         this.getAllServicesCategories();
@@ -56,7 +56,7 @@ export class SectionHandler implements CategoryHandler {
         category.id,
         category.type,
         category.departament!,
-        category.name
+        category.name.toUpperCase()
       )
       .then(() => {
         this.getAllArticlesCategories();
@@ -76,10 +76,10 @@ export class SectionHandler implements CategoryHandler {
         }
       }
     } else {
-      for (let i = 0; i < this.articlesSections.length; i++) {
-        const gSection = this.articlesSections[i];
+      for (let i = 0; i < this.servicesSections.length; i++) {
+        const gSection = this.servicesSections[i];
         for (let j = 0; j < gSection.length; j++) {
-          const scc = this.articlesSections[i][j];
+          const scc = this.servicesSections[i][j];
           if (scc.id == id) {
             section = scc;
           }

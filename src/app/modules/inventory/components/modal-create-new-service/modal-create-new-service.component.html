@@ -1,31 +1,31 @@
 <div class="container">
-    <form *ngIf="data.newArticle != undefined">
+    <form *ngIf="data.newService != undefined">
         <div>
             <mat-form-field>
                 <mat-label>Codigo</mat-label>
-                <input disabled [(ngModel)]="data.newArticle.id" name="data.newArticle.id" matInput>
+                <input disabled [(ngModel)]="data.newService.id" name="data.newService.id" matInput>
             </mat-form-field>
-            <mat-form-field>
+            <!-- <mat-form-field>
                 <mat-label>Referencia</mat-label>
-                <input [(ngModel)]="data.newArticle.ref" name="data.newArticle.ref" matInput>
-            </mat-form-field>
+                <input [(ngModel)]="data.newService.ref" name="data.newService.ref" matInput>
+            </mat-form-field> -->
             <mat-form-field>
                 <mat-label>Nombre</mat-label>
-                <input [(ngModel)]="data.newArticle.name" name="data.newArticle.name" matInput>
+                <input [(ngModel)]="data.newService.name" name="data.newService.name" matInput>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Precio</mat-label>
-                <input [(ngModel)]="data.newArticle.value" name="data.newArticle.value" matInput>
+                <input [(ngModel)]="data.newService.value" name="data.newService.value" matInput>
             </mat-form-field>
         </div>
         <div>
-            <mat-form-field>
+            <!-- <mat-form-field>
                 <mat-label>Stock</mat-label>
-                <input [(ngModel)]="data.newArticle.stock" name="data.newArticle.stock" matInput>
-            </mat-form-field>
+                <input [(ngModel)]="data.newService.stock" name="data.newService.stock" matInput>
+            </mat-form-field> -->
             <mat-form-field>
                 <mat-label>Departamento</mat-label>
-                <mat-select [(ngModel)]="data.newArticle.dpto" name="data.newArticle.dpto">
+                <mat-select [(ngModel)]="data.newService.dpto" name="data.newService.dpto">
                     <mat-option *ngFor="let dpto of departaments" [value]="dpto.id">
                         {{dpto.name}}
                     </mat-option>
@@ -33,7 +33,7 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Seccion</mat-label>
-                <mat-select [(ngModel)]="data.newArticle.section" name="data.newArticle.section">
+                <mat-select [(ngModel)]="data.newService.section" name="data.newService.section">
                     <mat-option *ngFor="let scc of sections" [value]="scc.id">
                         {{scc.name}}
                     </mat-option>
@@ -41,7 +41,7 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Familia</mat-label>
-                <mat-select [(ngModel)]="data.newArticle.family" name="data.newArticle.family">
+                <mat-select [(ngModel)]="data.newService.family" name="data.newService.family">
                     <mat-option *ngFor="let fam of families" [value]="fam.id">
                         {{fam.name}}
                     </mat-option>
@@ -52,13 +52,13 @@
 
 
     <div class="botonera">
-        <app-button-blue *ngIf="data.newArticle.id == undefined" [mat-dialog-close]="data.newArticle">
-            Crear nuevo articulo
+        <app-button-blue *ngIf="data.newService.id == undefined" [mat-dialog-close]="data.newService">
+            Crear nuevo servicio
         </app-button-blue>
-        <app-button-blue *ngIf="data.newArticle.id != undefined" [mat-dialog-close]="data.newArticle">
-            Guardar Articulo
+        <app-button-blue *ngIf="data.newService.id != undefined" [mat-dialog-close]="data.newService">
+            Guardar servicio
         </app-button-blue>
-        <app-button-blue (pressClick)="deleteArticle()" class="delete" *ngIf="data.newArticle.id != undefined" [mat-dialog-close]="data.newArticle">
+        <app-button-blue (pressClick)="deleteArticle()" class="delete" *ngIf="data.newService.id != undefined" [mat-dialog-close]="data.newService">
             Eliminar
         </app-button-blue>
     </div>
