@@ -37,37 +37,45 @@ export class ModalCreateNewComponent {
     this.dialogRef.close();
   }
 
-  public foods: any[] = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' },
-  ];
-
   public departaments: any[] = [];
   public sections: any[] = [];
   public families: any[] = [];
+  public sectionsF: any[] = [];
+  public familiesF: any[] = [];
 
   public getAllDepartaments() {
     this.categoryService.getAllArticlesDepartaments().then((data: any) => {
       this.departaments = data;
-      console.log(this.departaments);
-
     })
   }
 
   public getAllSections() {
     this.categoryService.getAllArticlesSections().then((data: any) => {
       this.sections = data;
+      this.sectionsF = data;
     })
   }
 
   public getAllfamilies() {
     this.categoryService.getAllArticlesFamilies().then((data: any) => {
       this.families = data;
+      this.familiesF = data;
+    })
+  }
+
+  public filterSection(): void {
+    this.sectionsF = this.sections.filter((elem) => {
+      return elem.departament == this.data.newArticle.dpto;
+    })    
+  }
+
+  public filterFamily(): void {
+    this.familiesF = this.families.filter((elem) => {
+      return elem.departament == this.data.newArticle.dpto && elem.section == this.data.newArticle.section;
     })
   }
 
   public deleteArticle() {
-    this.articleService.deleteArticle(this.data.newArticle.id).then(()=>{})
+    this.articleService.deleteArticle(this.data.newArticle.id).then(() => { })
   }
 }

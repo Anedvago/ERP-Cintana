@@ -5,10 +5,7 @@
                 <mat-label>Codigo</mat-label>
                 <input disabled [(ngModel)]="data.newService.id" name="data.newService.id" matInput>
             </mat-form-field>
-            <!-- <mat-form-field>
-                <mat-label>Referencia</mat-label>
-                <input [(ngModel)]="data.newService.ref" name="data.newService.ref" matInput>
-            </mat-form-field> -->
+
             <mat-form-field>
                 <mat-label>Nombre</mat-label>
                 <input [(ngModel)]="data.newService.name" name="data.newService.name" matInput>
@@ -19,13 +16,11 @@
             </mat-form-field>
         </div>
         <div>
-            <!-- <mat-form-field>
-                <mat-label>Stock</mat-label>
-                <input [(ngModel)]="data.newService.stock" name="data.newService.stock" matInput>
-            </mat-form-field> -->
+
             <mat-form-field>
                 <mat-label>Departamento</mat-label>
-                <mat-select [(ngModel)]="data.newService.dpto" name="data.newService.dpto">
+                <mat-select (selectionChange)="filterSection()" [(ngModel)]="data.newService.dpto"
+                    name="data.newService.dpto">
                     <mat-option *ngFor="let dpto of departaments" [value]="dpto.id">
                         {{dpto.name}}
                     </mat-option>
@@ -33,8 +28,9 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Seccion</mat-label>
-                <mat-select [(ngModel)]="data.newService.section" name="data.newService.section">
-                    <mat-option *ngFor="let scc of sections" [value]="scc.id">
+                <mat-select (selectionChange)="filterFamily()" [(ngModel)]="data.newService.section"
+                    name="data.newService.section">
+                    <mat-option *ngFor="let scc of sectionsF" [value]="scc.id">
                         {{scc.name}}
                     </mat-option>
                 </mat-select>
@@ -42,7 +38,7 @@
             <mat-form-field>
                 <mat-label>Familia</mat-label>
                 <mat-select [(ngModel)]="data.newService.family" name="data.newService.family">
-                    <mat-option *ngFor="let fam of families" [value]="fam.id">
+                    <mat-option *ngFor="let fam of familiesF" [value]="fam.id">
                         {{fam.name}}
                     </mat-option>
                 </mat-select>
@@ -58,7 +54,8 @@
         <app-button-blue *ngIf="data.newService.id != undefined" [mat-dialog-close]="data.newService">
             Guardar servicio
         </app-button-blue>
-        <app-button-blue (pressClick)="deleteArticle()" class="delete" *ngIf="data.newService.id != undefined" [mat-dialog-close]="data.newService">
+        <app-button-blue (pressClick)="deleteArticle()" class="delete" *ngIf="data.newService.id != undefined"
+            [mat-dialog-close]="data.newService">
             Eliminar
         </app-button-blue>
     </div>

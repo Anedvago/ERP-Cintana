@@ -25,7 +25,7 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Departamento</mat-label>
-                <mat-select [(ngModel)]="data.newArticle.dpto" name="data.newArticle.dpto">
+                <mat-select (selectionChange)="filterSection()" [(ngModel)]="data.newArticle.dpto" name="data.newArticle.dpto">
                     <mat-option *ngFor="let dpto of departaments" [value]="dpto.id">
                         {{dpto.name}}
                     </mat-option>
@@ -33,8 +33,8 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Seccion</mat-label>
-                <mat-select [(ngModel)]="data.newArticle.section" name="data.newArticle.section">
-                    <mat-option *ngFor="let scc of sections" [value]="scc.id">
+                <mat-select (selectionChange)="filterFamily()" [(ngModel)]="data.newArticle.section" name="data.newArticle.section">
+                    <mat-option *ngFor="let scc of sectionsF" [value]="scc.id">
                         {{scc.name}}
                     </mat-option>
                 </mat-select>
@@ -42,7 +42,7 @@
             <mat-form-field>
                 <mat-label>Familia</mat-label>
                 <mat-select [(ngModel)]="data.newArticle.family" name="data.newArticle.family">
-                    <mat-option *ngFor="let fam of families" [value]="fam.id">
+                    <mat-option *ngFor="let fam of familiesF" [value]="fam.id">
                         {{fam.name}}
                     </mat-option>
                 </mat-select>

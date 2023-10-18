@@ -38,11 +38,11 @@ export class ArticleService {
   public async insertNewArticle(article: Article): Promise<any[] | null> {
     let { data: Rooms, error } = await this.supabaseClient
       .from('Articles')
-      .insert([article])
+      .insert([this.articleNameUpper(article)])
       .select('*')
 
-      console.log(error);
-      
+    console.log(error);
+
     return Rooms;
   }
 
@@ -64,5 +64,11 @@ export class ArticleService {
       .eq('id', id)
 
     return error;
+  }
+
+  public articleNameUpper(article: Article) {
+    article.name = article.name.toUpperCase();
+    article.ref = article.ref.toUpperCase();
+    return article;
   }
 }

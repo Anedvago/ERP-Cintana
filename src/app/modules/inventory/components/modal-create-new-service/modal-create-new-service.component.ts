@@ -37,18 +37,15 @@ export class ModalCreateNewServiceComponent {
     this.dialogRef.close();
   }
 
-  public foods: any[] = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' },
-  ];
 
   public departaments: any[] = [];
   public sections: any[] = [];
   public families: any[] = [];
+  public sectionsF: any[] = [];
+  public familiesF: any[] = [];
 
   public getAllDepartaments() {
-    this.categoryService.getAllArticlesDepartaments().then((data: any) => {
+    this.categoryService.getAllServicesDepartaments().then((data: any) => {
       this.departaments = data;
       console.log(this.departaments);
 
@@ -56,14 +53,26 @@ export class ModalCreateNewServiceComponent {
   }
 
   public getAllSections() {
-    this.categoryService.getAllArticlesSections().then((data: any) => {
+    this.categoryService.getAllServicesSections().then((data: any) => {
       this.sections = data;
     })
   }
 
   public getAllfamilies() {
-    this.categoryService.getAllArticlesFamilies().then((data: any) => {
+    this.categoryService.getAllServicesFamilies().then((data: any) => {
       this.families = data;
+    })
+  }
+
+  public filterSection(): void {
+    this.sectionsF = this.sections.filter((elem) => {
+      return elem.departament == this.data.newService.dpto;
+    })        
+  }
+
+  public filterFamily(): void {
+    this.familiesF = this.families.filter((elem) => {
+      return elem.departament == this.data.newService.dpto && elem.section == this.data.newService.section;
     })
   }
 
