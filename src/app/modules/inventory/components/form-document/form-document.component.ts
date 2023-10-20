@@ -1,11 +1,12 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ButtonBlueComponent } from 'src/app/shared/button-blue/button-blue.component';
 import { FormsModule } from '@angular/forms';
+
 @Component({
-  selector: 'app-form-articles',
+  selector: 'app-form-document',
   standalone: true,
   imports: [
     CommonModule,
@@ -14,10 +15,10 @@ import { FormsModule } from '@angular/forms';
     ButtonBlueComponent,
     FormsModule,
   ],
-  templateUrl: './form-articles.component.html',
-  styleUrls: ['./form-articles.component.css'],
+  templateUrl: './form-document.component.html',
+  styleUrls: ['./form-document.component.css']
 })
-export class FormArticlesComponent {
+export class FormDocumentComponent {
   public param: string = '';
   @Output()
   public filterByCode: EventEmitter<string> = new EventEmitter<string>();

@@ -1,0 +1,30 @@
+<form>
+  <div class="row">
+    <div class="row1">
+      <mat-form-field>
+        <mat-label>Fecha Inicial</mat-label>
+        <input matInput [(ngModel)]="param" name="param" />
+      </mat-form-field>
+    </div>
+    <div class="row1">
+      <mat-form-field>
+        <mat-label>Fecha Final</mat-label>
+        <input matInput [(ngModel)]="param" name="param" />
+      </mat-form-field>
+    </div>
+    <div class="row1">
+      <mat-form-field>
+        <mat-label>Num Factura</mat-label>
+        <input matInput [(ngModel)]="param" name="param" />
+      </mat-form-field>
+    </div>
+    <app-button-blue class="row1" (pressClick)="emitFilterByCode()">Buscar Factura</app-button-blue>
+    <app-button-blue class="row1" (pressClick)="emitFilterByRef()">Auditar Factura</app-button-blue>
+  </div>
+  <div class="row">
+    <app-button-blue class="row2" (pressClick)="emitCreateNew()">Crear Documento</app-button-blue>
+    <app-button-blue class="row2">Filtrar Categoria</app-button-blue>
+    <app-button-blue class="row2" (pressClick)="emitQuitFilters()">Eliminar Factura</app-button-blue>
+    <app-button-blue class="row2" (pressClick)="emitQuitFilters()">Quitar Filtros</app-button-blue>
+  </div>
+</form>

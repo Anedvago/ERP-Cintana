@@ -19,6 +19,11 @@ form {
   height: 100%;
   overflow: hidden;
 }
+.row1-big {
+  width: 32%;
+  height: 100%;
+  overflow: hidden;
+}
 .row2 {
   width: 32%;
   height: 100%;

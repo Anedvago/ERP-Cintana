@@ -109,10 +109,12 @@ export class ArticlesComponent {
 
   insertNewArticle() {
     this.articlesService.insertNewArticle(this.newArticle!).then(() => { this.getArticles() })
+    this.cleanArticle()
 
   }
 
   updateArticle() {
     this.articlesService.updateArticle(this.newArticle!).then(() => { this.getArticles() })
+    this.cleanArticle()
   }
 }

@@ -28,7 +28,7 @@ export class ServicesService {
   public async insertNewService(service: Service): Promise<any[] | null> {
     let { data: Rooms, error } = await this.supabaseClient
       .from('Services')
-      .insert([service])
+      .insert([this.serviceNameUpper(service)])
       .select('*')
     console.log(service);
     
@@ -40,7 +40,7 @@ export class ServicesService {
   public async updateService(service: Service): Promise<any[] | null> {
     let { data: Rooms, error } = await this.supabaseClient
       .from('Services')
-      .update([service])
+      .update([this.serviceNameUpper(service)])
       .eq('id', service.id)
       .select('*');
     return Rooms;
@@ -55,5 +55,10 @@ export class ServicesService {
       .eq('id', id)
 
     return error;
+  }
+
+  public serviceNameUpper(service: Service) {
+    service.name = service.name.toUpperCase();
+    return service;
   }
 }
