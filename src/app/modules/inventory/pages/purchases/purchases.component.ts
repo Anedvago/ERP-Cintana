@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormDocumentComponent } from '../../components/form-document/form-document.component';
 import { TableComponent } from 'src/app/shared/table/table.component';
+import { PusrchaseService } from 'src/app/services/pusrchase.service';
 
 @Component({
   selector: 'app-purchases',
@@ -11,36 +12,46 @@ import { TableComponent } from 'src/app/shared/table/table.component';
   styleUrls: ['./purchases.component.css']
 })
 export class PurchasesComponent {
-  public columnsList = ["date", "number"];
+  public columnsList = ["date", "id"];
   public columnsDisplayList = ["Fecha", "Num"];
-  public rowsList = [
-    { date: "2023-03-09", number: "1" },
-    { date: "2023-03-09", number: "2" },
-    { date: "2023-03-09", number: "3" },
-    { date: "2023-03-09", number: "4" },
-    { date: "2023-03-09", number: "1" },
-    { date: "2023-03-09", number: "2" },
-    { date: "2023-03-09", number: "3" },
-    { date: "2023-03-09", number: "4" },
-    { date: "2023-03-09", number: "2" },
-    { date: "2023-03-09", number: "3" },
-    { date: "2023-03-09", number: "4" },
-    { date: "2023-03-09", number: "1" },
-    { date: "2023-03-09", number: "2" },
-    { date: "2023-03-09", number: "3" },
-    { date: "2023-03-09", number: "4" }];
+  public rowsList: any[] = [];
 
-  public columnsDetails = ["ref", "desc", "uni", "value", "discount", "total"];
+  public columnsDetails = ["reference", "description", "units", "value", "discount", "total"];
   public columnsDisplayDetails = ["Ref", "Descripcion", "Unidades", "Precio", "Descuento", "Total"];
-  public rowsDetails = [
-    { ref: "A001", desc: "Arroz Por Libra", uni: "2", value: "2300", discount: "0", total: "4600" },
-    { ref: "A001", desc: "Arroz Por Libra", uni: "2", value: "2300", discount: "0", total: "4600" },
-    { ref: "A001", desc: "Arroz Por Libra", uni: "2", value: "2300", discount: "0", total: "4600" }];
+  public rowsDetails:any[] = [];
 
-  public columnsTotals = ["references", "units", "raw", "discount", "total"];
+  public columnsTotals = ["references", "units", "gross", "discount", "net"];
   public columnsDisplayTotals = ["Refernecias", "Unidades", "Bruto", "Descuento", "Neto"];
   public rowsTotals = [
     { references: "2", units: "4", raw: "15600", discount: "0", total: "4600" }];
 
+  public factureActive: number = 0;
+  constructor(private purchaseService: PusrchaseService) {
+    this.getListFactures();
+    this.getTotalsActive();
+    
+  }
 
+
+  public getListFactures() {
+    this.purchaseService.getAllPurchasesCab().then((data) => {
+      this.rowsList = data!.map(function (obj) {
+        return { id: obj.id, date: obj.date.substring(0, 10) };
+      });
+      this.getDeailsById();
+    })
+
+  }
+
+  public getTotalsActive() {
+    this.purchaseService.getAllPurchasesCab().then((data) => {
+      this.rowsTotals = [data![this.factureActive]];
+    })
+  }
+
+  public getDeailsById(){
+    this.purchaseService.getPurchasesLinById(this.rowsList[this.factureActive].id).then((data) => {
+      this.rowsDetails = data!;
+    })
+  }
 }
