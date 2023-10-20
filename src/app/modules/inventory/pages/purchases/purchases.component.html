@@ -2,7 +2,7 @@
     <app-form-document type="SERVICE"  />
     <section>
         <div class="list">
-            <app-table [columns]="columnsList" [columnsDisplay]="columnsDisplayList" [data]="rowsList" ></app-table>
+            <app-table (clickTr)="selectFacture($event)" [columns]="columnsList" [columnsDisplay]="columnsDisplayList" [data]="rowsList" ></app-table>
         </div>
         <div class="content">
             <div class="table">

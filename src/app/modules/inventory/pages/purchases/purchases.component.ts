@@ -38,6 +38,7 @@ export class PurchasesComponent {
       this.rowsList = data!.map(function (obj) {
         return { id: obj.id, date: obj.date.substring(0, 10) };
       });
+      this.factureActive = this.rowsList[0].id;
       this.getDeailsById();
     })
 
@@ -45,13 +46,21 @@ export class PurchasesComponent {
 
   public getTotalsActive() {
     this.purchaseService.getAllPurchasesCab().then((data) => {
-      this.rowsTotals = [data![this.factureActive]];
+      this.rowsTotals = data!.filter((elem)=>{
+        return elem.id == this.factureActive;
+      });
     })
   }
 
   public getDeailsById(){
-    this.purchaseService.getPurchasesLinById(this.rowsList[this.factureActive].id).then((data) => {
+    this.purchaseService.getPurchasesLinById(this.factureActive).then((data) => {
       this.rowsDetails = data!;
     })
+  }
+
+  public selectFacture(event:any){
+    this.factureActive = event.id;
+    this.getTotalsActive();
+    this.getDeailsById();
   }
 }
