@@ -45,5 +45,10 @@
     class="sticky"
     position="sticky"
   ></tr>
-  <tr mat-row *matRowDef="let row; columns: columns" (click)="emitClickTr(row)"></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: columns"
+    (click)="emitClickTr(row)"
+    [ngClass]="{ active: active == row.id }"
+  ></tr>
 </table>

@@ -15,9 +15,13 @@ th {
 mat-chip-option {
   pointer-events: none;
 }
-tr:hover{
+tr:hover {
   background-color: rgb(238, 236, 236);
 }
-.sticky:hover{
+.sticky:hover {
   background-color: white;
+}
+.active {
+  background-color: #3056d3 !important;
+  color: white !important;
 }

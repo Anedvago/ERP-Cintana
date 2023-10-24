@@ -18,11 +18,13 @@ export class TableComponent {
   public columnsDisplay: any[] = [];
   @Input()
   public data: any[] = [];
+  @Input()
+  public active?: number = 0;
   @Output()
   public clickTr: EventEmitter<Article> = new EventEmitter<Article>();
 
   public emitClickTr(elem: any) {
     //console.log(elem);
-    this.clickTr.emit(elem)
+    this.clickTr.emit(elem);
   }
 }

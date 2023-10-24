@@ -9,29 +9,47 @@ import { PusrchaseService } from 'src/app/services/pusrchase.service';
   standalone: true,
   imports: [CommonModule, FormDocumentComponent, TableComponent],
   templateUrl: './purchases.component.html',
-  styleUrls: ['./purchases.component.css']
+  styleUrls: ['./purchases.component.css'],
 })
 export class PurchasesComponent {
-  public columnsList = ["date", "id"];
-  public columnsDisplayList = ["Fecha", "Num"];
+  public columnsList = ['date', 'id'];
+  public columnsDisplayList = ['Fecha', 'Num'];
   public rowsList: any[] = [];
 
-  public columnsDetails = ["reference", "description", "units", "value", "discount", "total"];
-  public columnsDisplayDetails = ["Ref", "Descripcion", "Unidades", "Precio", "Descuento", "Total"];
-  public rowsDetails:any[] = [];
+  public columnsDetails = [
+    'reference',
+    'description',
+    'units',
+    'value',
+    'discount',
+    'total',
+  ];
+  public columnsDisplayDetails = [
+    'Ref',
+    'Descripcion',
+    'Unidades',
+    'Precio',
+    'Descuento',
+    'Total',
+  ];
+  public rowsDetails: any[] = [];
 
-  public columnsTotals = ["references", "units", "gross", "discount", "net"];
-  public columnsDisplayTotals = ["Refernecias", "Unidades", "Bruto", "Descuento", "Neto"];
+  public columnsTotals = ['references', 'units', 'gross', 'discount', 'net'];
+  public columnsDisplayTotals = [
+    'Refernecias',
+    'Unidades',
+    'Bruto',
+    'Descuento',
+    'Neto',
+  ];
   public rowsTotals = [
-    { references: "2", units: "4", raw: "15600", discount: "0", total: "4600" }];
+    { references: '2', units: '4', raw: '15600', discount: '0', total: '4600' },
+  ];
 
   public factureActive: number = 0;
   constructor(private purchaseService: PusrchaseService) {
     this.getListFactures();
-    this.getTotalsActive();
-    
   }
-
 
   public getListFactures() {
     this.purchaseService.getAllPurchasesCab().then((data) => {
@@ -40,25 +58,27 @@ export class PurchasesComponent {
       });
       this.factureActive = this.rowsList[0].id;
       this.getDeailsById();
-    })
-
+      this.getTotalsActive();
+    });
   }
 
   public getTotalsActive() {
     this.purchaseService.getAllPurchasesCab().then((data) => {
-      this.rowsTotals = data!.filter((elem)=>{
+      this.rowsTotals = data!.filter((elem) => {
         return elem.id == this.factureActive;
       });
-    })
+    });
   }
 
-  public getDeailsById(){
-    this.purchaseService.getPurchasesLinById(this.factureActive).then((data) => {
-      this.rowsDetails = data!;
-    })
+  public getDeailsById() {
+    this.purchaseService
+      .getPurchasesLinById(this.factureActive)
+      .then((data) => {
+        this.rowsDetails = data!;
+      });
   }
 
-  public selectFacture(event:any){
+  public selectFacture(event: any) {
     this.factureActive = event.id;
     this.getTotalsActive();
     this.getDeailsById();
