@@ -38,6 +38,7 @@ export class ServicesComponent {
 
   constructor(private servicesService: ServicesService,public dialog: MatDialog) {
     this.getServices();
+    
   }
 
   public getServices() {

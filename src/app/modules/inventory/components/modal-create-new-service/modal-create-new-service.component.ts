@@ -31,6 +31,7 @@ export class ModalCreateNewServiceComponent {
     this.getAllDepartaments();
     this.getAllSections();
     this.getAllfamilies();
+    console.log(this.data.newService);
   }
 
   onNoClick(): void {
@@ -55,12 +56,14 @@ export class ModalCreateNewServiceComponent {
   public getAllSections() {
     this.categoryService.getAllServicesSections().then((data: any) => {
       this.sections = data;
+      this.sectionsF = data;
     })
   }
 
   public getAllfamilies() {
     this.categoryService.getAllServicesFamilies().then((data: any) => {
       this.families = data;
+      this.familiesF = data;
     })
   }
 
