@@ -1,5 +1,9 @@
 <div class="container">
-  <app-form-document type="SERVICE" />
+  <app-form-document (filterByInitialDate)="filterByInitialDate($event)" 
+  (filterByFinalDate)="filterByFinalDate($event)"
+  (filterByRangeDate)="filterByRangeDate($event)"
+  (filterByNumberFacture)="filterByNumberFacture($event)"
+  (quitFilters)="quitFilters()" />
   <section>
     <div class="list">
       <app-table
@@ -7,7 +11,7 @@
         (clickTr)="selectFacture($event)"
         [columns]="columnsList"
         [columnsDisplay]="columnsDisplayList"
-        [data]="rowsList"
+        [data]="rowsListF"
       ></app-table>
     </div>
     <div class="content">

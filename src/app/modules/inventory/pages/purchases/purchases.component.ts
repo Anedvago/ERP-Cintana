@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormDocumentComponent } from '../../components/form-document/form-document.component';
 import { TableComponent } from 'src/app/shared/table/table.component';
 import { PusrchaseService } from 'src/app/services/pusrchase.service';
+import { DateService } from 'src/app/services/date.service';
 
 @Component({
   selector: 'app-purchases',
@@ -15,6 +16,7 @@ export class PurchasesComponent {
   public columnsList = ['date', 'id'];
   public columnsDisplayList = ['Fecha', 'Num'];
   public rowsList: any[] = [];
+  public rowsListF: any[] = [];
 
   public columnsDetails = [
     'reference',
@@ -56,9 +58,10 @@ export class PurchasesComponent {
       this.rowsList = data!.map(function (obj) {
         return { id: obj.id, date: obj.date.substring(0, 10) };
       });
-      this.factureActive = this.rowsList[0].id;
-      this.getDeailsById();
-      this.getTotalsActive();
+      this.rowsListF = data!.map(function (obj) {
+        return { id: obj.id, date: obj.date.substring(0, 10) };
+      });
+      this.selectFacture(this.rowsListF[0])
     });
   }
 
@@ -80,7 +83,67 @@ export class PurchasesComponent {
 
   public selectFacture(event: any) {
     this.factureActive = event.id;
+    this.rowsDetails = [];
+    this.rowsTotals = [];
     this.getTotalsActive();
     this.getDeailsById();
+  }
+
+  public filterByInitialDate(event: any) {
+    this.rowsListF = this.rowsList.filter((elem) => {
+      return elem.date >= event;
+    })
+    if (this.rowsListF.length > 0) {
+      this.selectFacture(this.rowsListF[0])
+    } else {
+      this.rowsDetails = [];
+      this.rowsTotals = [];
+    }
+  }
+
+  public filterByFinalDate(event: any) {
+    this.rowsListF = this.rowsList.filter((elem) => {
+      return elem.date <= event;
+    })
+    if (this.rowsListF.length > 0) {
+      this.selectFacture(this.rowsListF[0])
+    } else {
+      this.rowsDetails = [];
+      this.rowsTotals = [];
+    }
+  }
+
+  public filterByRangeDate(event: any) {
+    this.rowsListF = this.rowsList.filter((elem) => {
+      return elem.date >= event.initialDate && elem.date <= event.finalDate;
+    })
+    if (this.rowsListF.length > 0) {
+      this.selectFacture(this.rowsListF[0])
+    } else {
+      this.rowsDetails = [];
+      this.rowsTotals = [];
+    }
+
+  }
+  public filterByNumberFacture(event: any) {
+    this.rowsListF = this.rowsList.filter((elem) => {
+      return elem.id == event;
+    })
+    if (this.rowsListF.length > 0) {
+      this.selectFacture(this.rowsListF[0])
+    } else {
+      this.rowsDetails = [];
+      this.rowsTotals = [];
+    }
+  }
+
+  public quitFilters():void{
+    this.rowsListF = this.rowsList;
+    if (this.rowsListF.length > 0) {
+      this.selectFacture(this.rowsListF[0])
+    } else {
+      this.rowsDetails = [];
+      this.rowsTotals = [];
+    }
   }
 }
