@@ -20,7 +20,7 @@ export class BookingService {
   public async getAllReservations(): Promise<any[] | null> {
     let { data: Reservations, error } = await this.supabaseClient
       .from('Bookings')
-      .select('*,Customers (name)');
+      .select('*,Customers (name), Rooms (name,color,textColor)');
     console.log(Reservations);
 
     return Reservations;

@@ -21,17 +21,29 @@ export class ReservationsComponent {
     plugins: [dayGridPlugin, timeGridPlugin],
     eventClick: this.click.bind(this),
     headerToolbar: {
-      start: 'dayGridMonth,timeGridWeek,timeGridDay',
+      start: 'dayGridMonth,timeGridWeek,timeGridDay,today',
       center: 'title',
       end: 'prevYear,prev,next,nextYear',
     },
     nowIndicator: true,
+    displayEventEnd: true,
+    eventTimeFormat: {
+      hour: '2-digit',
+      minute: '2-digit',
+      meridiem: true,
+    },
   };
 
   constructor(private bookingService: BookingService) {
     this.bookingService.getAllReservations().then((data) => {
       this.reservations = data!.map((elem) => {
-        return { title: elem.Customers.name, start: elem.start, end: elem.end };
+        return {
+          title: `${elem.Customers.name} - ${elem.Rooms.name}`,
+          start: elem.start,
+          end: elem.end,
+          color: elem.Rooms.color,
+          textColor: elem.Rooms.textColor,
+        };
       });
       this.calendarOptions.events = this.reservations;
     });
